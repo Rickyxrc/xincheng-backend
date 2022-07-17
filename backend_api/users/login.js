@@ -8,7 +8,11 @@ module.exports = (req, res) => {
         hash.update(req.query['password']);
         hash_res = hash.digest('hex');
         db.query('SELECT id FROM users WHERE (username = ' + db.escape(req.query['username']) + ' OR mail = ' + db.escape(req.query['username']) + ') AND password = ' + db.escape(hash_res) + ';', (err, data) => {
-            if (data.length == 0)
+            if (err) {
+                console.log(err);
+                error(res);
+            }
+            else if (data.length == 0)
                 res.json({ success:false,msg:"invalid username or email." });
             else {
                 var hash = createHash('sha256');

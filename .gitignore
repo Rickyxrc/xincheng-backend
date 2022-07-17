@@ -1,4 +1,8 @@
+# xincheng backend gitignore
+
 node_modules/
 dist/
 *.local
 .vs/
+
+database/conn.js
