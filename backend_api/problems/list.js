@@ -36,8 +36,8 @@ module.exports = (req, res) => {
         db.query(sql, (err, data) => {
           if (err) {
             console.log(err);
-            return error(res, err.message);
-          }
+            error(res);
+        }
           return success(res, data);
         });
       }).catch( () => {

@@ -1,8 +1,9 @@
-let express = require('express')
-let app = express()
-let cors = require('cors')
-let bodyParser = require('body-parser')
-let sqlinit = require('./database/init')
+let express = require('express');
+let app = express();
+let cors = require('cors');
+let bodyParser = require('body-parser');
+let sqlinit = require('./database/init');
+let getenv = require('./common/getenv.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,6 +29,11 @@ else{
     //* permission>=0 , permission>=1
     app.all('/problems/list', require('./backend_api/problems/list'));
 
+    //? 获取题目信息
+    //! BETA
+    //* permission>=0
+    app.all('/problems/get', require('./backend_api/problems/get'));
+
     //? 新建题目
     //! BETA
     //* permission>=1
@@ -36,14 +42,14 @@ else{
     //? 更改题目
     //! BETA
     //* permission>=1
-    // app.all('/problems/edit', require('./backend_api/problems/deit'));
+    app.all('/problems/edit', require('./backend_api/problems/edit'));
 
     //? 删除题目
     //! BETA
     //* permission>=1
     // app.all('/problems/delete', require('./backend_api/problems/delete'));
 
-    app.listen(80, () => {
-        console.log('server started.');
+    app.listen(getenv("PORT",0,80), () => {
+        console.log('server is listening on port '+getenv("PORT",0,80)+'.');
     });
 }
