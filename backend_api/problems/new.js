@@ -1,28 +1,57 @@
-let permission = require('../../common/permission');
-let denied = require('../../common/denied');
-let error = require('../../common/error');
-let success = require('../../common/success');
-const db = require('../../database/conn');
+let permission = require("../../common/permission");
+let denied = require("../../common/denied");
+let error = require("../../common/error");
+let success = require("../../common/success");
+let badrequest = require('../../common/badrequest')
+let db = require('../../database/conn');
 
 module.exports = (req, res) => {
     permission(req.query.session, 1)
-        .then(() => {
-            db.run('INSERT INTO problems VALUES (NULL,' +
-                db.escape(req.query.title) +
-                ',0,' +
-                db.escape(req.query.content) +
-                ',' +
-                db.escape(req.query.pid) +
-                ',' +
-                db.escape(req.query.difficulty) +
-                ');',
-                (err, data) => {
+        .then((level) => {
+            if (req.query.title && req.query.content && req.query.pid && req.query.difficulty)
+                db.query('INSERT INTO problems VALUES(NULL,' +
+                        db.escape(req.query.title) +
+                        ',0,' +
+                        db.escape(req.query.content) +
+                        ',' +
+                        db.escape(req.query.pid) +
+                        ',' +
+                        db.escape(req.query.difficulty) +
+                        ');',
+                    (err, data) => {
                     if (err) {
                         console.log(err);
                         error(res);
                     }
                     else
-                        success(res,[])
-            })
-        } )
+                        success(res, undefined);
+                });
+            else
+                badrequest(res);
+        })
+        .catch((err) => {
+            if(err)
+                console.log(err);
+            denied(res);
+        })
+    // permission(req.query.session, 1)
+    //     .then(() => {
+    //         db.run('INSERT INTO problems VALUES (NULL,' +
+    //             db.escape(req.query.title) +
+    //             ',0,' +
+    //             db.escape(req.query.content) +
+    //             ',' +
+    //             db.escape(req.query.pid) +
+    //             ',' +
+    //             db.escape(req.query.difficulty) +
+    //             ');',
+    //             (err, data) => {
+    //                 if (err) {
+    //                     console.log(err);
+    //                     error(res);
+    //                 }
+    //                 else
+    //                     success(res,[])
+    //         })
+    //     } )
 }

@@ -37,7 +37,7 @@ else{
     //? 新建题目
     //! BETA
     //* permission>=1
-    // app.all('/problems/new', require('./backend_api/problems/new'));
+    app.all('/problems/new', require('./backend_api/problems/new'));
 
     //? 更改题目
     //! BETA

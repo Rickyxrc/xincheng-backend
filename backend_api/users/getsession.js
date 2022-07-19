@@ -1,5 +1,5 @@
 var db = require("../../database/conn");
-const { createHash } = require("node:crypto");
+const { createHash } = require("crypto");
 var hash = createHash("sha256");
 
 module.exports = (req, res) => {

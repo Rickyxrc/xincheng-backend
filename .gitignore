@@ -6,3 +6,7 @@ dist/
 .vs/
 
 database/conn.js
+
+common/getenv.js
+
+yarn-error.log
