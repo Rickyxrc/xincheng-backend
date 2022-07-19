@@ -9,49 +9,30 @@ module.exports = (req, res) => {
     permission(req.query.session, 1)
         .then((level) => {
             if (req.query.title && req.query.content && req.query.pid && req.query.difficulty)
-                db.query('INSERT INTO problems VALUES(NULL,' +
+                db.query('REPLACE INTO problems VALUES(' +
+                        req.query.pid + 
+                        ',' +
                         db.escape(req.query.title) +
                         ',0,' +
                         db.escape(req.query.content) +
-                        ',' +
-                        db.escape(req.query.pid) +
                         ',' +
                         db.escape(req.query.difficulty) +
                         ');',
                     (err, data) => {
                     if (err) {
                         console.log(err);
-                        error(res);
+                        return error(res);
                     }
-                    else
-                        success(res, undefined);
+                        return success(res, undefined);
                 });
             else
-                badrequest(res);
+                return badrequest(res);
         })
         .catch((err) => {
-            if(err)
+            if (err) {
                 console.log(err);
-            denied(res);
+                return error(res);
+            }
+            return denied(res);
         })
-    // permission(req.query.session, 1)
-    //     .then(() => {
-    //         db.run('INSERT INTO problems VALUES (NULL,' +
-    //             db.escape(req.query.title) +
-    //             ',0,' +
-    //             db.escape(req.query.content) +
-    //             ',' +
-    //             db.escape(req.query.pid) +
-    //             ',' +
-    //             db.escape(req.query.difficulty) +
-    //             ');',
-    //             (err, data) => {
-    //                 if (err) {
-    //                     console.log(err);
-    //                     error(res);
-    //                 }
-    //                 else
-    //                     success(res,[])
-    //         })
-    //     } )
 }

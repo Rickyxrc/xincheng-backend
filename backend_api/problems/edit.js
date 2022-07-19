@@ -7,7 +7,7 @@ let db = require('../../database/conn')
 module.exports = (req, res) => {
     permission(req.query.session, 1)
         .then(() => {
-            db.query('UPDATE problems SET context = ' + db.escape(req.query.content) + ' WHERE pid=' + db.escape(req.query.pid) + ';', (err, data) => {
+            db.query('UPDATE problems SET content = ' + db.escape(req.query.content) + ' WHERE pid=' + db.escape(req.query.pid) + ';', (err, data) => {
                 if (err) {
                     console.log(err);
                     error(res);

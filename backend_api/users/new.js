@@ -1,6 +1,5 @@
 var db = require("../../database/conn");
 const { createHash } = require("crypto");
-var hash = createHash("sha256");
 
 module.exports = (req, res) => {
   if (req.query["username"] && req.query["password"] && req.query["mail"]) {
@@ -16,6 +15,7 @@ module.exports = (req, res) => {
           error(res);
         }
         else {
+          var hash = createHash("sha256");
           hash.update(req.query["password"]);
           if (data.length == 0) {
             hash_res = hash.digest("hex");
@@ -31,7 +31,7 @@ module.exports = (req, res) => {
                 res.json({ success: true });
               }
             );
-          } else res.json({ success: true, msg: "Same username or mail." });
+          } else res.json({ success: false, msg: "Same username or mail." });
         }
       });
   } else res.json({ success: false, msg: "invalid request." });
