@@ -9,18 +9,17 @@ CREATE TABLE IF NOT EXISTS `users` (
 );
 
 CREATE TABLE IF NOT EXISTS `problems` (
-    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `pid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(32) NOT NULL,
     `active` BOOLEAN NOT NULL,
-    `context` TEXT NOT NULL,
-    `pid` INT NOT NULL,
+    `content` TEXT NOT NULL,
     `difficulty` INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `records` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `problem` INT NOT NULL,
-    FOREIGN key(`problem`) REFERENCES `problems`(`id`) ON UPDATE CASCADE,
+    FOREIGN key(`problem`) REFERENCES `problems`(`pid`) ON UPDATE CASCADE,
     `user` INT NOT NULL,
     FOREIGN key(`user`) REFERENCES `users`(`id`) ON UPDATE CASCADE,
     `code` TEXT NOT NULL,
