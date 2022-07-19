@@ -19,9 +19,3 @@ Online Judge (OJ) is an online system used to evaluate participating programs in
 # 如何安装该项目 How to install this project
 
 `yarn && yarn dev`
-
-# 如何使用项目 How to use this project
-
-做你想做的.
-
-Do anything you want.
