@@ -20,6 +20,10 @@ else{
     //? 创建用户
     //TODO 邮箱验证
     app.all('/users/new',require('./backend_api/users/new'));
+    
+    //? 删除用户
+    //! BETA
+    app.all('/users/delete', require('./backend_api/users/delete'));
 
     //? 用户登录接口
     app.all('/users/login', require('./backend_api/users/login'));
