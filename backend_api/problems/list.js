@@ -10,9 +10,11 @@ module.exports = (req, res) => {
 	if (req.query.page == undefined) req.query.page = 1;
 	permission(req.query["session"], 1)
 		.then((level) => {
-			db.query("SELECT pid,title,difficulty,active FROM problems WHERE title LIKE '%" + req.query.data + "%'" +
-				"OR pid LIKE '%" + req.query.data + "%'" +
-				" LIMIT " + db.escape(req.query.limit) + ";", (err, data) => {
+			sql = "SELECT pid,title,difficulty,active FROM problems WHERE title LIKE '%" + req.query.data + "%'" +
+			"OR pid LIKE '%" + req.query.data + "%'" +
+			" LIMIT " + db.escape(req.query.limit) + ";";
+
+			db.query(sql, (err, data) => {
 				if (err) {
 					console.log(err);
 					return error(res, err.message);
@@ -26,10 +28,10 @@ module.exports = (req, res) => {
 				return error(res);
 			}
 			permission(req.query["session"], 0).then((level) => {
-				sql = "SELECT title,difficulty,active FROM problems WHERE active=1 AND (title LIKe '%" +
-					req.query.data +
-					"%' OR pid LIKE '%" + req.query.data + "'%) LIMIT " + db.escape(Number(req.query.limit)) +
-					" OFFSET " + db.escape(Number(req.query.page)) + ";";
+				sql = "SELECT pid,title,difficulty,active FROM problems WHERE active=1 AND (title LIKE '%" + req.query.data + "%'" +
+				"OR pid LIKE '%" + req.query.data + "%')" +
+				" LIMIT " + db.escape(req.query.limit) + ";";
+
 				db.query(sql
 					, (err, data) => {
 						if (err) {
