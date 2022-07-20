@@ -1,38 +1,33 @@
-var db = require("../../database/conn");
-const { createHash } = require("crypto");
-var hash = createHash("sha256");
+const db = require("../../database/conn");
+const badrequest = require("../../common/badrequest");
+const success = require("../../common/success");
+const error = require("../../common/error");
+const denied = require("../../common/denied");
 
 module.exports = (req, res) => {
-  if (req.query["username"] && req.query["password"] && req.query["mail"]) {
-    db.query(
-      'SELECT * from users WHERE username="' +
-        req.query["username"] +
-        '" OR mail="' +
-        req.query["mail"] +
-        '";',
-      (err, data) => {
-        if (err) {
-          console.log(err);
-          error(res);
-        }
-        else {
-          hash.update(req.query["password"]);
-          if (data.length == 0) {
-            hash_res = hash.digest("hex");
-            db.query(
-              "INSERT INTO users VALUES (NULL," +
-              db.escape(req.query["username"]) +
-              "," +
-              db.escape(req.query["mail"]) +
-              "," +
-              db.escape(hash_res) +
-              ",0,'',1);",
-              (err, data) => {
-                res.json({ success: true });
-              }
-            );
-          } else res.json({ success: true, msg: "Same username or mail." });
-        }
-      });
-  } else res.json({ success: false, msg: "invalid request." });
+	if (req.query.session) {
+		db.query(
+			'SELECT user from sessions WHERE session=' +
+			db.escape(req.query.session) +
+			';',
+			(err, data) => {
+				if (err) {
+					console.log(err);
+					return error(res);
+				}
+				else if (data.length == 0) {
+					return denied(res);
+				}
+				else {
+					db.query('SELECT username,mail,permission,tag,color FROM users WHERE id=' + db.escape(data[0].user), (err, data) => {
+						if (err || data.length == 0) {
+							console.log(err);
+							return error(res);
+						}
+						return success(res, data[0]);
+					})
+				}
+			});
+	} else
+		return badrequest(res);
 };

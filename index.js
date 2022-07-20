@@ -20,7 +20,15 @@ else{
     //? 创建用户
     //TODO 邮箱验证
     app.all('/users/new',require('./backend_api/users/new'));
+    
+    //? 删除用户
+    //! BETA
+    app.all('/users/delete', require('./backend_api/users/delete'));
 
+    //? 用户列表
+    //! BETA
+    app.all('/users/list', require('./backend_api/users/list'));
+    
     //? 用户登录接口
     app.all('/users/login', require('./backend_api/users/login'));
     
@@ -48,6 +56,11 @@ else{
     //! BETA
     //* permission>=1
     app.all('/problems/delete', require('./backend_api/problems/delete'));
+
+    //? 根据session获取用户信息
+    //! BETA
+    //* permission>=1
+    app.all('/users/getsession', require('./backend_api/users/getsession'));
 
     app.listen(getenv("PORT",0,80), () => {
         console.log('server is listening on port '+getenv("PORT",0,80)+'.');
