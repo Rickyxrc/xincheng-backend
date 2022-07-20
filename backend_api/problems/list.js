@@ -11,7 +11,7 @@ module.exports = (req, res) => {
   permission(req.query["session"], 1)
     .then((level) => {
       sql =
-        "SELECT pid,title,difficulty,active FROM problems WHERE title LIKe '%" +
+        "SELECT pid,title,difficulty,active FROM problems WHERE title LIKE '%" +
         req.query.data +
         "%)' LIMIT " +
         db.escape(req.query.limit) +
