@@ -49,6 +49,11 @@ else{
     //* permission>=1
     app.all('/problems/delete', require('./backend_api/problems/delete'));
 
+    //? 根据session获取用户信息
+    //! BETA
+    //* permission>=1
+    app.all('/users/getsession', require('./backend_api/users/getsession'));
+
     app.listen(getenv("PORT",0,80), () => {
         console.log('server is listening on port '+getenv("PORT",0,80)+'.');
     });
