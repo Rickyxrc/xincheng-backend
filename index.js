@@ -25,6 +25,10 @@ else{
     //! BETA
     app.all('/users/delete', require('./backend_api/users/delete'));
 
+    //? 用户列表
+    //! BETA
+    app.all('/users/list', require('./backend_api/users/list'));
+    
     //? 用户登录接口
     app.all('/users/login', require('./backend_api/users/login'));
     
