@@ -1,7 +1,7 @@
 var db = require('../../database/conn');
 var unixdate = require('../../common/unixdate');
 var error = require('../../common/error');
-const { createHash } = require('node:crypto');
+const { createHash } = require('crypto');
 const badrequest = require('../../common/badrequest');
 
 module.exports = (req, res) => {

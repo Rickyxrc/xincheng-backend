@@ -47,7 +47,7 @@ else{
     //? 删除题目
     //! BETA
     //* permission>=1
-    // app.all('/problems/delete', require('./backend_api/problems/delete'));
+    app.all('/problems/delete', require('./backend_api/problems/delete'));
 
     app.listen(getenv("PORT",0,80), () => {
         console.log('server is listening on port '+getenv("PORT",0,80)+'.');
