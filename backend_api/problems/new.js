@@ -13,7 +13,9 @@ module.exports = (req, res) => {
                         req.query.pid + 
                         ',' +
                         db.escape(req.query.title) +
-                        ',0,' +
+                        ',' +
+                        db.escape(req.query.active) +
+                        ',' +
                         db.escape(req.query.content) +
                         ',' +
                         db.escape(req.query.difficulty) +
