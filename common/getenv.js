@@ -1,4 +1,3 @@
-require('dotenv').config();
 module.exports = (env_name, required, default_value) => {
     if (process.env[env_name] == undefined) {
         if (required) {
