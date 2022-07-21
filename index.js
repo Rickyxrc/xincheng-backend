@@ -47,11 +47,6 @@ else{
     //* permission>=1
     app.all('/problems/new', require('./backend_api/problems/new'));
 
-    //? 更改题目
-    //! BETA
-    //* permission>=1
-    app.all('/problems/edit', require('./backend_api/problems/edit'));
-
     //? 删除题目
     //! BETA
     //* permission>=1

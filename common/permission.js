@@ -10,7 +10,11 @@ module.exports = (session, level) => {
           " AND session=" +
           db.escape(session) +
           ";",
-        (err,data) => {
+        (err, data) => {
+          if (err) {
+            console.log(err);
+            return error(res);
+          }
           if(data.length == 0) reject();
           else if (data[0]["permission"] >= level) resolve(data[0]["permission"]);
           else reject();
