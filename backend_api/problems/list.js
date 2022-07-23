@@ -49,13 +49,13 @@ module.exports = (req, res) => {
           if (req.query["data"] == undefined) req.query.data = "";
 
           sql =
-            "SELECT pid,title,difficulty,active FROM problems WHERE title LIKE '%" +
+            "SELECT pid,title,difficulty,active FROM problems WHERE (title LIKE '%" +
             req.query.data +
             "%'" +
             " OR pid LIKE '%" +
             req.query.data +
             "%'" +
-            " AND active=0 ORDER BY pid LIMIT " +
+            ") AND active=1 ORDER BY pid LIMIT " +
             Number(skipNum) +
             "," +
             Number(req.query["limit"]) +

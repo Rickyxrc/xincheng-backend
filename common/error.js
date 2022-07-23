@@ -1,3 +1,3 @@
 module.exports = (res) => {
-    return res.status(500).json({success:false,msg:'server error'})
-}
+  return res.status(500).json({ success: false, msg: "server error" });
+};

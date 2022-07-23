@@ -6,26 +6,29 @@ let badrequest = require("../../common/badrequest");
 let db = require("../../database/conn");
 
 module.exports = (req, res) => {
-    permission(req.query.session, 2)
-        .then((level) => {
-            if (req.query.pid) {
-                db.query("DELETE FROM problems WHERE pid=" + db.escape(req.query.pid) + ';', (err, data) => {
-                    if (err) {
-                        console.log(err);
-                        error(res);
-                    } else {
-                        success(res);
-                    }
-                });
-            } else {
-                badrequest(res);
-            }
-        })
-        .catch((err) => {
+  permission(req.query.session, 2)
+    .then((level) => {
+      if (req.query.pid) {
+        db.query(
+          "DELETE FROM problems WHERE pid=" + db.escape(req.query.pid) + ";",
+          (err, data) => {
             if (err) {
-                err(res);
+              console.log(err);
+              error(res);
             } else {
-                denied(res);
+              success(res);
             }
-        })
-}
+          }
+        );
+      } else {
+        badrequest(res);
+      }
+    })
+    .catch((err) => {
+      if (err) {
+        err(res);
+      } else {
+        denied(res);
+      }
+    });
+};
