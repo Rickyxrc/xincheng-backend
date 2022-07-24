@@ -50,7 +50,7 @@ if (sqlinit() != 0) {
 
   //? 根据session获取用户信息
   //* permission>=1
-  app.all("/users/getsession", require("./backend_api/users/getsession"));
+  app.all("/users/getsession", require("./backend_api/users/getInfo"));
 
   //? 提交题目代码
   //! BETA

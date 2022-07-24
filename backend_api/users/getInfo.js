@@ -7,7 +7,7 @@ const denied = require("../../common/denied");
 module.exports = (req, res) => {
   if (req.query.session) {
     db.query(
-      "SELECT user from sessions WHERE session=" +
+      "SELECT user FROM sessions WHERE session=" +
         db.escape(req.query.session) +
         ";",
       (err, data) => {
