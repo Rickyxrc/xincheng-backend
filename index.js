@@ -63,7 +63,7 @@ if (sqlinit() != 0) {
 
   //? 获取题目评测记录列表
   //! BETA
-  //* user == owner || permission=2
+  //* user == owner || permission>=0
   app.all("/records/list", require("./backend_api/records/list"));
 
   app.listen(getenv("PORT", 0, 80), () => {
