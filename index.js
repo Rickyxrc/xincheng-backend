@@ -50,17 +50,21 @@ if (sqlinit() != 0) {
 
   //? 根据session获取用户信息
   //* permission>=1
-  app.all("/users/getsession", require("./backend_api/users/getInfo"));
+  app.all("/users/info", require("./backend_api/users/info"));
 
   //? 提交题目代码
-  //! BETA
   //* permission>=0
   app.all("/records/submit", require("./backend_api/records/submit"));
 
-  //? 获取题目代码
+  //? 获取题目评测记录
   //! BETA
   //* user == owner || permission=2
   app.all("/records/get", require("./backend_api/records/get"));
+
+  //? 获取题目评测记录列表
+  //! BETA
+  //* user == owner || permission=2
+  app.all("/records/list", require("./backend_api/records/list"));
 
   app.listen(getenv("PORT", 0, 80), () => {
     console.log("server is listening on port " + getenv("PORT", 0, 80) + ".");
