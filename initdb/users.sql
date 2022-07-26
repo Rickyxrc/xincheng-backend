@@ -19,11 +19,10 @@ CREATE TABLE IF NOT EXISTS `problems` (
 CREATE TABLE IF NOT EXISTS `records` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `problem` INT NOT NULL,
-    FOREIGN key(`problem`) REFERENCES `problems`(`pid`) ON UPDATE CASCADE,
+    FOREIGN key(`problem`) REFERENCES `problems`(`pid`),
     `user` INT NOT NULL,
     FOREIGN key(`user`) REFERENCES `users`(`id`) ON UPDATE CASCADE,
     `code` TEXT NOT NULL,
-    `score` TINYINT(10),
     `judgestat` TINYINT(10) NOT NULL,
     `judgeinfo` VARCHAR(255)
 );

@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         permission(req.query.session, nperms)
           .then((level) => {
             db.query(
-              "SELECT title,content,difficulty FROM problems WHERE pid=" +
+              "SELECT active,title,content,difficulty FROM problems WHERE pid=" +
                 db.escape(req.query.pid) +
                 ";",
               (err, data) => {

@@ -63,8 +63,18 @@ if (sqlinit() != 0) {
 
   //? 获取题目评测记录列表
   //! BETA
-  //* user == owner || permission=2
-  app.all("/records/list", require("./backend_api/records/list"));
+  //* permission>=0
+  // app.all("/records/list", require("./backend_api/records/list"));
+
+  //? 获取未评测题目
+  //! BETA
+  //* permission=2
+  app.all("/records/unjudged", require("./backend_api/records/unjudged"));
+
+  //? 获取未评测题目
+  //! BETA
+  //* permission=2
+  app.all("/records/set", require("./backend_api/records/set"));
 
   app.listen(getenv("PORT", 0, 80), () => {
     console.log("server is listening on port " + getenv("PORT", 0, 80) + ".");

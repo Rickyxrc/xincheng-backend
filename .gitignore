@@ -10,3 +10,5 @@ database/conn.js
 yarn-error.log
 
 .env
+
+apidoc/

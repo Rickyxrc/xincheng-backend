@@ -15,17 +15,17 @@ module.exports = (req, res) => {
         req.query.difficulty
       )
         db.query(
-          "REPLACE INTO problems VALUES(" +
-            req.query.pid +
-            "," +
-            db.escape(req.query.title) +
-            "," +
-            db.escape(req.query.active) +
-            "," +
-            db.escape(req.query.content) +
-            "," +
-            db.escape(req.query.difficulty) +
-            ");",
+          `INSERT INTO problems VALUES(${db.escape(req.query.pid)},${db.escape(
+            req.query.title
+          )},${db.escape(req.query.active)},${db.escape(
+            req.query.content
+          )},${db.escape(
+            Number(req.query.difficulty)
+          )}) ON DUPLICATE KEY UPDATE title=${db.escape(
+            req.query.title
+          )},content=${db.escape(req.query.content)},active=${db.escape(
+            Number(req.query.active)
+          )},difficulty=${db.escape(Number(req.query.difficulty))};`,
           (err, data) => {
             if (err) {
               console.log(err);
