@@ -6,7 +6,7 @@ let badrequest = require("../../common/badrequest");
 let db = require("../../database/conn");
 
 module.exports = (req, res) => {
-  permission(req.query.session, 2)
+  permission(req.query.session, 1)
     .then((level) => {
       if (req.query.pid) {
         db.query(

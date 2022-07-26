@@ -64,7 +64,7 @@ if (sqlinit() != 0) {
   //? 获取题目评测记录列表
   //! BETA
   //* permission>=0
-  // app.all("/records/list", require("./backend_api/records/list"));
+  app.all("/records/list", require("./backend_api/records/list"));
 
   //? 获取未评测题目
   //! BETA
