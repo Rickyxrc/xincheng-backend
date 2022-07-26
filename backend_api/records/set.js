@@ -1,3 +1,36 @@
+/**
+ * @api {post} /records/set 更新评测状态
+ * @apiGroup records
+ * @apiDescription 根据评测编号和目标评测状态更新评测状态
+ *
+ * @apiParam {String} session 会话session
+ * @apiParam {Number} rid 评测编号
+ * @apiParam {String} status 目标评测状态
+ * @apiParamExample {json} 样例请求
+ * {
+ *   "session": "sessionExample",
+ *   "rid": "70",
+ *   "status": "1",
+ * }
+ *
+ * @apiError (Error 4xx) {String} mag 错误信息
+ * @apiErrorExample  {json} 403 session无效或已过期
+ * {
+ *   "success": false,
+ *   "msg": "access denied."
+ * }
+ * @apiErrorExample  {json} 400 传入参数不完全
+ * {
+ *   "success": false,
+ *   "msg": "bad request."
+ * }
+ *
+ * @apiSuccessExample  {json} session有效且未过期
+ * {
+ *  "success": true
+ * }
+ */
+
 let permission = require("../../common/permission");
 let denied = require("../../common/denied");
 let badrequest = require("../../common/badrequest");
