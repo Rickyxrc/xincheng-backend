@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `records` (
     `user` INT NOT NULL,
     FOREIGN key(`user`) REFERENCES `users`(`id`) ON UPDATE CASCADE,
     `code` TEXT NOT NULL,
-    `judgestat` TINYINT(10) NOT NULL,
     `judgeinfo` VARCHAR(255)
 );
 

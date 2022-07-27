@@ -8,12 +8,14 @@ let error = require("../../common/error");
 
 module.exports = (req, res) => {
   permission(req.query.session, 0)
-    .then(() => {
-      db.query("SELECT id FROM records WHERE judgeinfo='J';", (err, data) => {
+    .then((level) => {
+      db.query('SELECT count(id)"len" FROM records;', (err, data) => {
         if (err) {
+          console.log("at /records/sum:");
           console.log(err);
           return error(res);
-        } else return success(res, data);
+        }
+        return success(res,data[0]);
       });
     })
     .catch((err) => {
