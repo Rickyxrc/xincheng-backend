@@ -88,10 +88,13 @@ module.exports = (req, res) => {
                         // console.log(data);
                         // console.log(data_tmp);
                         // console.log(data_tmpp);
-                        if (data_tmpp[0].permission == 2 || data[0].user == data_tmp[0].user)
-                            return success(res, data);
-                        else
-                            return denied(res);
+                        if (
+                          data_tmpp[0].permission == 2 ||
+                          data[0].user == data_tmp[0].user
+                        )
+                          if (data != []) return success(res, data);
+                          else return notfound(res);
+                        else return denied(res);
                       }
                     }
                   );
