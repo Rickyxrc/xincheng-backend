@@ -15,7 +15,7 @@ function init() {
         (err, data) => {}
       );
       conn.query(
-        "CREATE TABLE IF NOT EXISTS `records` (`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`problem` INT NOT NULL,FOREIGN key(`problem`) REFERENCES `problems`(`pid`),`user` INT NOT NULL,FOREIGN key(`user`) REFERENCES `users`(`id`) ON UPDATE CASCADE,`code` TEXT NOT NULL,`judgestat` TINYINT(10) NOT NULL,`judgeinfo` VARCHAR(255));",
+        "CREATE TABLE IF NOT EXISTS `records` (`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`problem` INT NOT NULL,FOREIGN key(`problem`) REFERENCES `problems`(`pid`),`user` INT NOT NULL,FOREIGN key(`user`) REFERENCES `users`(`id`) ON UPDATE CASCADE,`code` TEXT NOT NULL,`judgeinfo` VARCHAR(255));",
         (err, data) => {}
       );
       conn.query(

@@ -63,7 +63,7 @@ module.exports = (req, res) => {
     .then((level) => {
       if (req.query.rid) {
         db.query(
-          `SELECT problem,user,(SELECT username FROM users WHERE id=user)"username",(SELECT color FROM users WHERE id=user)"usercol",(SELECT tag FROM users WHERE id=user)"usertag",code,judgestat,judgeinfo FROM records WHERE id=${db.escape(
+          `SELECT problem,user,(SELECT username FROM users WHERE id=user)"username",(SELECT color FROM users WHERE id=user)"usercol",(SELECT tag FROM users WHERE id=user)"usertag",code,judgeinfo FROM records WHERE id=${db.escape(
             req.query.rid
           )};`,
           (err, data) => {
@@ -91,9 +91,10 @@ module.exports = (req, res) => {
                         if (
                           data_tmpp[0].permission == 2 ||
                           data[0].user == data_tmp[0].user
-                        )
-                          if (data != []) return success(res, data);
+                        ) {
+                          if (data[0]) return success(res, data[0]);
                           else return notfound(res);
+                        }
                         else return denied(res);
                       }
                     }

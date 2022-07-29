@@ -44,7 +44,7 @@ module.exports = (req, res) => {
     .then((level) => {
       if (req.query.rid && req.query.status) {
         db.query(
-          `UPDATE records SET judgeinfo = ${db.escape(req.query.status)},judgestat=1 WHERE id=${db.escape(req.query.rid)}`,
+          `UPDATE records SET judgeinfo = ${db.escape(req.query.status)} WHERE id=${db.escape(req.query.rid)}`,
           (err, data) => {
             if (err) {
               console.log(err);

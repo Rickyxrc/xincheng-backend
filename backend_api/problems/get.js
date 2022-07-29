@@ -47,8 +47,12 @@ module.exports = (req, res) => {
                 db.escape(req.query.pid) +
                 ";",
               (err, data) => {
-                if (data != []) success(res, data[0]);
-                else badrequest(res);
+                if (err) {
+                  console.log(err);
+                  return error(res);
+                }
+                console.log(data)
+                return success(res, data[0]);
               }
             );
           })

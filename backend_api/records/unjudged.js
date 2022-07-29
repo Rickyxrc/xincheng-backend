@@ -48,7 +48,7 @@ let error = require("../../common/error");
 module.exports = (req, res) => {
   permission(req.query.session, 0)
     .then(() => {
-      db.query("SELECT id FROM records WHERE judgestat=0;", (err, data) => {
+      db.query("SELECT id FROM records WHERE judgeinfo='J';", (err, data) => {
         if (err) {
           console.log(err);
           return error(res);

@@ -3,28 +3,23 @@
  * @apiGroup problems
  * @apiDescription 新建或更改题目
  *
- * @apiParam {String} username 用户名
- * @apiParam {String} password 密码
+ * @apiParam {String} title 题目标题
+ * @apiParam {String} content 题目内容
+ * @apiParam {Number} pid 题目编号
+ * @apiParam {Number} difficulty 题目难度
  * @apiParamExample {json} 样例请求
  * {
- *   "username": "testuser",
- *   "password": "samplepassword"
+ *   "session": "a-64-bit-hex-string",
+ *   "title": "testtitle",
+ *   "content": "# sample\ncontent\nusing *Markdown*",
+ *   "pid": 9999,
+ *   "difficulty": 1
  * }
- *
- * @apiError (Error 403) {String} mag 错误信息
- * @apiErrorExample  {json} 用户名或密码错误
- * {
- *   success: false,
- *   msg: "invalid username or email.",     
- * }
- *
- *
  *
  * @apiSuccess {String} session 会话session
  * @apiSuccessExample  {json} 用户名和密码均正确
  * {
- *   "success":true,
- *   "session":"a-64-bit-hex-string"
+ *   "success":true
  * }
  */
 

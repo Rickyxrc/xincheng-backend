@@ -76,6 +76,11 @@ if (sqlinit() != 0) {
   //* permission=2
   app.all("/records/set", require("./backend_api/records/set"));
 
+  //? 获取未评测题目
+  //! BETA
+  //* permission=2
+  app.all("/records/sum", require("./backend_api/records/sum"));
+
   app.listen(getenv("PORT", 0, 80), () => {
     console.log("server is listening on port " + getenv("PORT", 0, 80) + ".");
   });
